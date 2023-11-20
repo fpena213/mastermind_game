@@ -1,8 +1,25 @@
-function Guesses( {guesses} ) {
+import { useState, useEffect } from "react";
 
-    return (
+function Guesses( { guess, solution } ) {
+  const [numCorrect, setNumCorrect] = useState(0);
+  const solutionArray = solution.toString().split("");
+
+  const solutionObj = {};
+
+  useEffect(() => {
+    for (let i = 0; i < solutionArray.length; i++) {
+      solutionObj[i] = solutionArray[i];
+    }
+    for (let i = 0; i < guess.length; i++) {
+      if (!solutionObj[i] === guess[i]) {
+        break
+      }
+    }
+  }, [guess, solutionArray])
+
+  return (
       <div>
-        {guesses}
+        You have {numCorrect} correct numbers.
       </div>
     );
   }

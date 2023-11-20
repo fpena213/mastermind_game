@@ -4,11 +4,11 @@ const guessNumberController = require('../controllers/guessNumberController');
 
 const router = express.Router();
 
-router.get('/', getNumberController.getCorrectNumber, (req, res) => {
-  return res.status(200).send(res.locals.correctNumber);
+router.get('/', getNumberController.getRandomNumber, (req, res) => {
+  return res.status(200).send(res.locals.solution);
 });
 
-router.post('/', guessNumberController.addGuess, (req, res) => {
+router.post('/', guessNumberController.addGuess, getNumberController.compareNumbers, (req, res) => {
     return res.status(200).send(res.locals.newGuess);
 });
 

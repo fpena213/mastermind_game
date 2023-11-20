@@ -26,7 +26,6 @@ function GameBoard( {solution} ) {
         event.preventDefault();
         setGuessesLeft((guesses) => guesses -1);
         setGuess([firstNum, secondNum, thirdNum, fourthNum]);
-        guesses.push(<Guess guess={guess} key={guessesLeft} />)
         // const u = user.username;
         // if (u === undefined) return console.log('Error: Not Logged In');
         // // console.log(category, content);
@@ -35,37 +34,25 @@ function GameBoard( {solution} ) {
         // // console.log('this is user', user)
         // // console.log({ content, category, user });
         // const postData = { category, content, user: user.username };
-        // const addHack = {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(postData),
-        // };
-    
-        // fetch('/api', addHack)
-        //   .then((response) => response.json())
-        //   .then((postData) => {
-        //     console.log(postData);
-        //     setNewHack(newHack + 'created');
-        //     console.log(newHack);
-        //   })
-        //   .catch((err) => console.log('Error ', err));
-    
-        // setContent('');
-      };
-    if (guess.join('') == solution) {
-        return (
-            <div>
-                You win!
-            </div>
-        )
-    }
-
+        const addGuess = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ guess: [firstNum, secondNum, thirdNum, fourthNum] }),
+          };
+        fetch('/api', addGuess)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => console.log('Error submitting guess', err));
+    };
 
     if (guessesLeft === 0) {
         return (
             <div>
                 Game Over.
-                The answer was {}.
+                The answer was {solution}.
                 <div>
                     <button>Try Again?</button>
                 </div>
@@ -117,7 +104,7 @@ function GameBoard( {solution} ) {
                     Submit Guess
                 </button>
             </form>
-            {guesses}
+            <Guess guess={guess} solution={solution} />
             <div>Number of Guesses Left: {guessesLeft}</div>
         </div>
     );

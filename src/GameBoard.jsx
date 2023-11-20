@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Guess from './Guess';
 
-function GameBoard() {
+function GameBoard( {solution} ) {
     const [firstNum, setFirstNum] = useState('');
     const [secondNum, setSecondNum] = useState('');
     const [thirdNum, setThirdNum] = useState('');
@@ -52,6 +52,14 @@ function GameBoard() {
     
         // setContent('');
       };
+    if (guess.join('') == solution) {
+        return (
+            <div>
+                You win!
+            </div>
+        )
+    }
+
 
     if (guessesLeft === 0) {
         return (

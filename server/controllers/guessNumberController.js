@@ -2,8 +2,9 @@ const guessNumberController = {};
 
 guessNumberController.addGuess = (req, res, next) => {
     try {
-        const { guess } = req.body;
+        const { guess, solution } = req.body;
         res.locals.newGuess = guess;
+        res.locals.solution = solution;
         return next();
     }
     catch(err) {

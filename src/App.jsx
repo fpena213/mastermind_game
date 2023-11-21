@@ -4,6 +4,8 @@ import GameBoard from './GameBoard.jsx';
 
 function App() {
   const [solution, setSolution] = useState('');
+  const [guessesLeft, setGuessesLeft] = useState(10)
+  
   const handleClick = async () => {
     try {
       const response = await fetch('/api/');
@@ -14,13 +16,33 @@ function App() {
     }
   }
 
+  const handleStartOver = (event) => {
+    event.preventDefault();
+    setGuessesLeft(10);
+    handleClick();
+  }
+
+  if (guessesLeft === 0) {
+    return (
+        <div>
+            Game Over.
+            The answer was {solution}.
+            <div>
+                <button onClick={handleStartOver}>
+                    Try Again?
+                </button>
+            </div>
+        </div>
+    )
+  }
+
   return (
     <div>
       Correct answer for testing: {solution}
       <button onClick={handleClick}>
         Start New Game
       </button>
-      <GameBoard solution={solution} />
+      <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />
     </div>
   );
 }

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import Guess from './Guess';
 
-function GameBoard( {solution} ) {
+function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
     const [firstNum, setFirstNum] = useState('');
     const [secondNum, setSecondNum] = useState('');
     const [thirdNum, setThirdNum] = useState('');
     const [fourthNum, setFourthNum] = useState('');
-    const [guessesLeft, setGuessesLeft] = useState(10)
     const [guess, setGuess] = useState([]);
-    const guesses = [];
 
     const changeNum = (event) => {
         if (event.target.id === '0') {
@@ -24,22 +22,15 @@ function GameBoard( {solution} ) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setGuessesLeft((guesses) => guesses -1);
+        setGuessesLeft((guessesLeft) => guessesLeft -1);
         setGuess([firstNum, secondNum, thirdNum, fourthNum]);
-        // const u = user.username;
-        // if (u === undefined) return console.log('Error: Not Logged In');
-        // // console.log(category, content);
-        // // setNewHack(undefined);
-        // // console.log('content', content, 'category', category, 'user', u);
-        // // console.log('this is user', user)
-        // // console.log({ content, category, user });
-        // const postData = { category, content, user: user.username };
+
         const addGuess = {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ guess: [firstNum, secondNum, thirdNum, fourthNum] }),
+            body: JSON.stringify({ guess: [firstNum, secondNum, thirdNum, fourthNum], solution: solution }),
           };
         fetch('/api', addGuess)
           .then((response) => {
@@ -47,19 +38,6 @@ function GameBoard( {solution} ) {
           })
           .catch((err) => console.log('Error submitting guess', err));
     };
-
-    if (guessesLeft === 0) {
-        return (
-            <div>
-                Game Over.
-                The answer was {solution}.
-                <div>
-                    <button>Try Again?</button>
-                </div>
-                
-            </div>
-        )
-    }
 
     return (
         <div className="board">

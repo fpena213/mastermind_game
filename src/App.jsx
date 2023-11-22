@@ -2,9 +2,10 @@ import { useState } from 'react';
 import './App.css';
 import GameBoard from './GameBoard.jsx';
 
+
 function App() {
   const [solution, setSolution] = useState('');
-  const [guessesLeft, setGuessesLeft] = useState(10)
+  const [guessesLeft, setGuessesLeft] = useState(10);
   
   const handleNewGame = async () => {
     try {
@@ -22,7 +23,8 @@ function App() {
     handleNewGame();
   }
 
-  if (guessesLeft === 0) {
+
+if (guessesLeft === 0) {
     return (
         <div>
             Game Over.
@@ -34,7 +36,7 @@ function App() {
             </div>
         </div>
     )
-  }
+  } 
 
   return (
     <div>
@@ -42,7 +44,7 @@ function App() {
       <button onClick={handleNewGame}>
         Start New Game
       </button>
-      <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />
+        <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />
     </div>
   );
 }

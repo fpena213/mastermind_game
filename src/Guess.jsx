@@ -1,21 +1,7 @@
 import { useState, useEffect } from "react";
 
 function Guesses( { guess, solution, numCorrect, locCorrect, guessesLeft } ) {
-  // const [numCorrect, setNumCorrect] = useState(0);
-  // // const [locCorrect, setLocCorrect] = useState(0);
-  // console.log(guess)
-  // if (numCorrect === 0 && locCorrect === 0 && guess !== undefined) {
-  //   return (
-  //     <div>All incorrect.</div>
-  //   )
-  // } else {
-  //   return (
-  //     <div>
-  //       You have {numCorrect} correct numbers and {locCorrect} in the correct spot
-  //     </div>
-  //   )
-  // }
-
+  //TODO: need to handle win on last guess vs game over and possibly move props around
 
 
   return (
@@ -28,7 +14,10 @@ function Guesses( { guess, solution, numCorrect, locCorrect, guessesLeft } ) {
             <th>{guess[3]}</th>
           </tr>
         </table>
-        {numCorrect === 0 && locCorrect === 0 && guessesLeft === 10 ? 
+        {numCorrect === 4 && locCorrect === 4 ?
+          <div>You Win!</div>
+          :
+        numCorrect === 0 && locCorrect === 0 && guessesLeft === 10 ? 
           <div></div>
           :
           numCorrect === 0 && locCorrect === 0 && guessesLeft !== 10 ?
@@ -36,11 +25,8 @@ function Guesses( { guess, solution, numCorrect, locCorrect, guessesLeft } ) {
           :
          <div>You have {numCorrect} correct numbers and {locCorrect} in the correct spot.</div>
         }
-    
-
         <div>Number of Guesses Left: {guessesLeft}</div>
       </div>
-
   );
  }
   

@@ -42,8 +42,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
         for (let i = 0; i < solutionArray.length; i++) {
             solutionObj[i] = solutionArray[i];
         }
-        const currentGuess = [`${firstNum} ${secondNum} ${thirdNum} ${fourthNum}`];
-        console.log(currentGuess)
+        const currentGuess = [`${firstNum}${secondNum}${thirdNum}${fourthNum}`];
         setGuessHistory((prevHistory) => [...prevHistory, currentGuess]);
         
         const addGuess = {
@@ -76,6 +75,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                     max="7"
                     value={firstNum}
                     onChange={changeNum}
+                    required
                 />
                 <input
                     name='secondNum'
@@ -85,6 +85,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                     max="7"
                     value={secondNum}
                     onChange={changeNum}
+                    required
                 />
                 <input
                     name='thirdNum'
@@ -94,6 +95,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                     max="7"
                     value={thirdNum}
                     onChange={changeNum}
+                    required
                 />
                 <input
                     name='fourthNum'
@@ -103,22 +105,13 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                     max="7"
                     value={fourthNum}
                     onChange={changeNum}
+                    required
                 />
                 <button className='button' type='submit'>
                     Submit Guess
                 </button>
             </form>
-            <Guess guess={guess} solution={solution} numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} />
-            <div>
-                <h2>Guess History:</h2>
-                <ul>
-                    {guessHistory.map((entry, index) => (
-                        <li key={index}>
-                            Guess {index+1}: {entry}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <Guess numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} guessHistory={guessHistory} />
         </div>
     );
   }

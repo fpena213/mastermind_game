@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-function Guesses( { guess, solution, numCorrect, locCorrect, guessesLeft } ) {
+function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
   const [win, setWin] = useState(false);
-  
+
   useEffect(() => {
     if (numCorrect === 4 && locCorrect === 4) {
       setWin(true);
@@ -11,14 +11,6 @@ function Guesses( { guess, solution, numCorrect, locCorrect, guessesLeft } ) {
 
   return (
       <div>
-        {/* <table>
-          <tr>
-            <th>{guess[0]}</th>
-            <th>{guess[1]}</th>
-            <th>{guess[2]}</th>
-            <th>{guess[3]}</th>
-          </tr>
-        </table> */}
         { win ?
           <div>You Win!</div>
           :
@@ -31,9 +23,19 @@ function Guesses( { guess, solution, numCorrect, locCorrect, guessesLeft } ) {
          <div>You have {numCorrect} correct numbers and {locCorrect} in correct location.</div>
         }
         { !win ? 
-          <div>Number of Guesses Left: {guessesLeft}</div>
+          <div>
+            Number of Guesses Left: {guessesLeft}
+            <h2>Guess History:</h2>
+            <ul>
+              {guessHistory.map((entry, index) => (
+                  <li key={index}>
+                      Guess {index+1}: {entry}
+                  </li>
+              ))}
+            </ul>
+          </div>
           :
-          <p></p>
+          <div></div>
         } 
       </div>
   );

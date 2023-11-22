@@ -7,6 +7,8 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
     const [thirdNum, setThirdNum] = useState('');
     const [fourthNum, setFourthNum] = useState('');
     const [guess, setGuess] = useState({});
+    const [numCorrect, setNumCorrect] = useState(0);
+    const [locCorrect, setLocCorrect] = useState(0);
 
     const changeNum = (event) => {
         if (event.target.id === '0') {
@@ -53,7 +55,8 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
             return response.json();
         })
         .then((data) => {
-            console.log('Response data', data)
+            setNumCorrect(data.numCorrect);
+            setLocCorrect(data.locCorrect);
          })
         .catch((err) => console.log('Error submitting guess', err));
     };
@@ -101,8 +104,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                     Submit Guess
                 </button>
             </form>
-            <Guess guess={guess} solution={solution} />
-            <div>Number of Guesses Left: {guessesLeft}</div>
+            <Guess guess={guess} solution={solution} numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} />
         </div>
     );
   }

@@ -39,6 +39,7 @@ getNumberController.compareNumbers = (req, res, next) => {
                 numCorrect++;
             }
         }
+
         res.locals = { numCorrect: numCorrect, locCorrect: locCorrect };
         return next();
     }

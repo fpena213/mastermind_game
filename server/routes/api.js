@@ -9,7 +9,7 @@ router.get('/', getNumberController.getRandomNumber, (req, res) => {
 });
 
 router.post('/', guessNumberController.addGuess, getNumberController.compareNumbers, (req, res) => {
-    return res.status(200).send(res.locals.newGuess);
+    return res.status(200).send(res.locals.numCorrect);
 });
 
 module.exports = router;

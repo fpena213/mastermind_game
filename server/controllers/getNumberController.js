@@ -22,11 +22,26 @@ getNumberController.getRandomNumber = (req, res, next) => {
 };
 
 getNumberController.compareNumbers = (req, res, next) => {
+    let numCorrect = 0;
+    let locCorrect = 0;
     try {
         const { guess, solution } = req.body;
-        console.log(guess, solution)
-        res.locals.newGuess = guess;
-        res.locals.solution = solution;
+        console.log(guess, Object.values(solution))
+        for (let num in guess) {
+            if (solution[num] === guess[num]) {
+                numCorrect++;
+                locCorrect++;
+            } else if (Object.values(solution).includes(guess[num])) {
+                numCorrect++;
+            }
+        }
+        // res.locals.newGuess = guess;
+        // res.locals.solution = solution;
+        //res.locals.numCorrect = numCorrect;
+        // res.locals.locCorrect= locCorrect;
+        console.log(numCorrect, locCorrect)
+        numCorrect = 0;
+        locCorrect = 0;
         return next();
     }
     catch(err) {

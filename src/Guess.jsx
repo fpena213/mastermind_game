@@ -11,7 +11,6 @@ function Guesses( { guess, solution } ) {
     for (let i = 0; i < solutionArray.length; i++) {
       solutionObj[i] = solutionArray[i];
     }
-    console.log(solutionObj)
     for (let i = 0; i < guess.length; i++) {
       if (solutionObj[i] === guess[i]) {
         setNumCorrect((numCorrect) => numCorrect + 1);

@@ -6,7 +6,7 @@ function App() {
   const [solution, setSolution] = useState('');
   const [guessesLeft, setGuessesLeft] = useState(10)
   
-  const handleClick = async () => {
+  const handleNewGame = async () => {
     try {
       const response = await fetch('/api/');
       const data = await response.json();
@@ -19,7 +19,7 @@ function App() {
   const handleStartOver = (event) => {
     event.preventDefault();
     setGuessesLeft(10);
-    handleClick();
+    handleNewGame();
   }
 
   if (guessesLeft === 0) {
@@ -39,7 +39,7 @@ function App() {
   return (
     <div>
       Correct answer for testing: {solution}
-      <button onClick={handleClick}>
+      <button onClick={handleNewGame}>
         Start New Game
       </button>
       <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />

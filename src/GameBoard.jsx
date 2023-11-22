@@ -32,8 +32,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
     const handleSubmit = (event) => {
         event.preventDefault();
         setGuessesLeft((guessesLeft) => guessesLeft -1);
-        //setGuess({0: firstNum, 1: secondNum, 2: thirdNum, 3: fourthNum});
-        console.log(guess)
+
         const solutionObj = {};
         const solutionArray = solution.toString().split("");
 
@@ -48,11 +47,15 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
             },
             body: JSON.stringify({ guess: guess, solution: solutionObj }),
           };
+
         fetch('/api', addGuess)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((err) => console.log('Error submitting guess', err));
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Response data', data)
+         })
+        .catch((err) => console.log('Error submitting guess', err));
     };
 
     return (

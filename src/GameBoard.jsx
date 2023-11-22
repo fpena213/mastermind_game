@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Guess from './Guess';
 
 function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
+    const [guessHistory, setGuessHistory] = useState([]);
     const [firstNum, setFirstNum] = useState('');
     const [secondNum, setSecondNum] = useState('');
     const [thirdNum, setThirdNum] = useState('');
@@ -41,7 +42,10 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
         for (let i = 0; i < solutionArray.length; i++) {
             solutionObj[i] = solutionArray[i];
         }
-
+        const currentGuess = [`${firstNum} ${secondNum} ${thirdNum} ${fourthNum}`];
+        console.log(currentGuess)
+        setGuessHistory((prevHistory) => [...prevHistory, currentGuess]);
+        
         const addGuess = {
             method: 'POST',
             headers: {
@@ -105,6 +109,16 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                 </button>
             </form>
             <Guess guess={guess} solution={solution} numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} />
+            <div>
+                <h2>Guess History:</h2>
+                <ul>
+                    {guessHistory.map((entry, index) => (
+                        <li key={index}>
+                            Guess {index+1}: {entry}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
   }

@@ -2,16 +2,17 @@ import { useState } from 'react';
 import './App.css';
 import GameBoard from './GameBoard.jsx';
 
-
 function App() {
   const [solution, setSolution] = useState('');
   const [guessesLeft, setGuessesLeft] = useState(10);
   
   const handleNewGame = async () => {
     try {
+      setGuessesLeft(10);
       const response = await fetch('/api/');
       const data = await response.json();
       setSolution(data);
+      
     } catch (err) {
       console.log(`Error starting new game: ${err}`);
     }
@@ -19,7 +20,7 @@ function App() {
 
   const handleStartOver = (event) => {
     event.preventDefault();
-    setGuessesLeft(10);
+    
     handleNewGame();
   }
 

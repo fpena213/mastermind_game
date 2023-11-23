@@ -11,7 +11,6 @@ const guessNumberController = {};
 //     res.send('Data saved to req.locals');
 // });
 
-
 guessNumberController.addGuess = (req, res, next) => {
     try {
         const { guess, solution } = req.body;

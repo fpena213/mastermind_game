@@ -11,6 +11,12 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
     const [numCorrect, setNumCorrect] = useState(0);
     const [locCorrect, setLocCorrect] = useState(0);
 
+    useEffect(() => {
+        if (guessesLeft === 10) {
+        setGuessHistory([]);
+        }
+    }, [guessesLeft]);
+
     const changeNum = (event) => {
         if (event.target.id === '0') {
             setFirstNum(event.target.value);

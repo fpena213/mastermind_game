@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
+function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory, solution } ) {
   const [win, setWin] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
         <div>Number of Guesses Left: {guessesLeft}</div>
         :
         win ?
-          <div>You Win!</div>
+          <div>You Win! The correct answer was {solution}.</div>
         :
         !win && guessesLeft > 0 ?
         <div> 
@@ -42,7 +42,7 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
           </div>
           :
           !win && guessesLeft === 0 ?
-          <p>Game Over.</p>
+          <p>Game Over. The correct answer was {solution}.</p>
           :
           <div></div>
           }

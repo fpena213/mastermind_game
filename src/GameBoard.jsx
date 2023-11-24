@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Guess from './Guess';
 
-function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
+function GameBoard( {solution, guessesLeft, setGuessesLeft } ) {
     const [guessHistory, setGuessHistory] = useState([]);
     const [firstNum, setFirstNum] = useState('');
     const [secondNum, setSecondNum] = useState('');
@@ -42,43 +42,6 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
           }))
     }, [firstNum, secondNum, thirdNum, fourthNum]);
 
-    useEffect(() => {
-        console.log(guessHistory);
-      }, [guessHistory]);
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     setGuessesLeft((guessesLeft) => guessesLeft -1);
-
-    //     const solutionObj = {};
-    //     const solutionArray = solution.toString().split("");
-
-    //     for (let i = 0; i < solutionArray.length; i++) {
-    //         solutionObj[i] = solutionArray[i];
-    //     }
-    //     const currentGuess = [`${firstNum}${secondNum}${thirdNum}${fourthNum}`];
-        
-    //     const addGuess = {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ guess: guess, solution: solutionObj }),
-    //       };
-
-    //     fetch('/api', addGuess)
-    //     .then((response) => {
-    //         return response.json();
-    //     })
-    //     .then((data) => {
-    //         setNumCorrect(data.numCorrect);
-    //         setLocCorrect(data.locCorrect);
-    //      })
-    //      .then(() => {
-    //         setGuessHistory((prevHistory) => [...prevHistory, { guess: currentGuess, numCorrect: numCorrect, locCorrect: locCorrect}]);
-    //      })
-    //     .catch((err) => console.log('Error submitting guess', err));
-    // };
     const handleSubmit = async (event) => {
         event.preventDefault();
         setGuessesLeft((guessesLeft) => guessesLeft - 1);
@@ -102,7 +65,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
           });
       
           if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`Error - Status: ${response.status}`);
           }
       
           const data = await response.json();
@@ -166,7 +129,7 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
                     Submit Guess
                 </button>
             </form>
-            <Guess numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} guessHistory={guessHistory} />
+            <Guess numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} guessHistory={guessHistory} solution={solution} />
         </div>
     );
   }

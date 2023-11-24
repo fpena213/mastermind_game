@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import GameBoard from './GameBoard.jsx';
 
@@ -19,31 +19,23 @@ function App() {
     }
   }
 
-  const handleStartOver = (event) => {
-    setStarted(true);
-    event.preventDefault();
-    handleNewGame();
-  }
+  useEffect(() => {
+    if (guessesLeft === 0) {
+      setStarted(false);
+    }
+  }, [guessesLeft]);
 
   return (
     <div>
-      { guessesLeft === 10 && started === false ?
-        <div>
-          <button onClick={handleNewGame} started={started}>
+      {solution}
+      <div>
+          <button onClick={handleNewGame}>
             Start New Game
           </button>
         </div>
-        :
-        guessesLeft === 0 ? 
-          <div>
-            <button onClick={handleStartOver}>
-              Play Again?
-            </button>
-          </div>
-          :
-          <div></div>
-      }
-      <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />
+      <div>
+        <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />
+      </div>
     </div>  
   );
 }

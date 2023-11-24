@@ -13,7 +13,11 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
 
     useEffect(() => {
         if (guessesLeft === 10) {
-        setGuessHistory([]);
+            setGuessHistory([]);
+            setFirstNum('');
+            setSecondNum('');
+            setThirdNum('');
+            setFourthNum('');
         }
     }, [guessesLeft]);
 
@@ -36,39 +40,84 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft} ) {
             2: thirdNum,
             3: fourthNum,
           }))
-    }, [firstNum, secondNum, thirdNum, fourthNum])
+    }, [firstNum, secondNum, thirdNum, fourthNum]);
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        console.log(guessHistory);
+      }, [guessHistory]);
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     setGuessesLeft((guessesLeft) => guessesLeft -1);
+
+    //     const solutionObj = {};
+    //     const solutionArray = solution.toString().split("");
+
+    //     for (let i = 0; i < solutionArray.length; i++) {
+    //         solutionObj[i] = solutionArray[i];
+    //     }
+    //     const currentGuess = [`${firstNum}${secondNum}${thirdNum}${fourthNum}`];
+        
+    //     const addGuess = {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({ guess: guess, solution: solutionObj }),
+    //       };
+
+    //     fetch('/api', addGuess)
+    //     .then((response) => {
+    //         return response.json();
+    //     })
+    //     .then((data) => {
+    //         setNumCorrect(data.numCorrect);
+    //         setLocCorrect(data.locCorrect);
+    //      })
+    //      .then(() => {
+    //         setGuessHistory((prevHistory) => [...prevHistory, { guess: currentGuess, numCorrect: numCorrect, locCorrect: locCorrect}]);
+    //      })
+    //     .catch((err) => console.log('Error submitting guess', err));
+    // };
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        setGuessesLeft((guessesLeft) => guessesLeft -1);
-
+        setGuessesLeft((guessesLeft) => guessesLeft - 1);
+      
         const solutionObj = {};
         const solutionArray = solution.toString().split("");
-
+      
         for (let i = 0; i < solutionArray.length; i++) {
-            solutionObj[i] = solutionArray[i];
+          solutionObj[i] = solutionArray[i];
         }
+      
         const currentGuess = [`${firstNum}${secondNum}${thirdNum}${fourthNum}`];
-        setGuessHistory((prevHistory) => [...prevHistory, currentGuess]);
-        
-        const addGuess = {
+      
+        try {
+          const response = await fetch('/api', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ guess: guess, solution: solutionObj }),
-          };
+          });
+      
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+      
+          const data = await response.json();
+          setNumCorrect(data.numCorrect);
+          setLocCorrect(data.locCorrect);
+      
+          setGuessHistory((prevHistory) => [
+            ...prevHistory,
+            { guess: currentGuess, numCorrect: data.numCorrect, locCorrect: data.locCorrect },
+          ]);
+        } catch (error) {
+          console.error('Error submitting guess', error);
+        }
+      };
 
-        fetch('/api', addGuess)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            setNumCorrect(data.numCorrect);
-            setLocCorrect(data.locCorrect);
-         })
-        .catch((err) => console.log('Error submitting guess', err));
-    };
 
     return (
         <div className="board">

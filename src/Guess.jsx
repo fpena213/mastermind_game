@@ -7,28 +7,34 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
     if (numCorrect === 4 && locCorrect === 4) {
       setWin(true);
     }
-  }, [numCorrect, locCorrect])
+  }, [numCorrect, locCorrect]);
+
+  useEffect(() => {
+    if (guessesLeft === 10) {
+      setWin(false);
+    }
+  }, [guessesLeft])
 
   return (
       <div>
-        Number of Guesses Left: {guessesLeft}
         { numCorrect === 0 && locCorrect === 0 && guessesLeft === 10 ? 
-        <div></div>
+        <div>Number of Guesses Left: {guessesLeft}</div>
         :
         win ?
           <div>You Win!</div>
         :
         !win && guessesLeft !== 10 ?
         <div> 
+          Number of Guesses Left: {guessesLeft}
             <h2>Guess History:</h2>
             <ul>
               {guessHistory.map((entry, index) => (
                   <li key={index}>
-                      Guess {index+1}: {entry}
-                      { numCorrect === 0 && locCorrect === 0 && guessesLeft !== 10 ?
-                        <div>All incorrect</div>
+                      Guess {index+1}: {entry.guess}
+                      { entry.numCorrect === 0 && entry.locCorrect === 0 && guessesLeft !== 10 ?
+                        <div>All incorrect.</div>
                         :
-                        <div>You have {numCorrect} correct numbers and {locCorrect} in correct location.</div>
+                        <div>You have {entry.numCorrect} correct numbers and {entry.locCorrect} in the correct location.</div>
                       }
                   </li>
               ))}

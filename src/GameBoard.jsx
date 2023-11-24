@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import './GameBoard.css';
 import Guess from './Guess';
 
-function GameBoard( {solution, guessesLeft, setGuessesLeft } ) {
+function GameBoard( {solution, guessesLeft, setGuessesLeft, started } ) {
     const [guessHistory, setGuessHistory] = useState([]);
     const [firstNum, setFirstNum] = useState('');
     const [secondNum, setSecondNum] = useState('');
@@ -83,52 +84,56 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft } ) {
 
 
     return (
-        <div className="board">
-            <form onSubmit={handleSubmit}>
-                <input
-                    name='firstNum'
-                    type='number'
-                    id='0'
-                    min="0"
-                    max="7"
-                    value={firstNum}
-                    onChange={changeNum}
-                    required
-                />
-                <input
-                    name='secondNum'
-                    type='number'
-                    id='1'
-                    min="0"
-                    max="7"
-                    value={secondNum}
-                    onChange={changeNum}
-                    required
-                />
-                <input
-                    name='thirdNum'
-                    type='number'
-                    id='2'
-                    min="0"
-                    max="7"
-                    value={thirdNum}
-                    onChange={changeNum}
-                    required
-                />
-                <input
-                    name='fourthNum'
-                    type='number'
-                    id='3'
-                    min="0"
-                    max="7"
-                    value={fourthNum}
-                    onChange={changeNum}
-                    required
-                />
-                <button className='button' type='submit'>
-                    Submit Guess
-                </button>
-            </form>
+        <div className="gameBoard">
+            { started ? 
+                <form onSubmit={handleSubmit}>
+                    <input
+                        name='firstNum'
+                        type='number'
+                        id='0'
+                        min="0"
+                        max="7"
+                        value={firstNum}
+                        onChange={changeNum}
+                        required
+                    />
+                    <input
+                        name='secondNum'
+                        type='number'
+                        id='1'
+                        min="0"
+                        max="7"
+                        value={secondNum}
+                        onChange={changeNum}
+                        required
+                    />
+                    <input
+                        name='thirdNum'
+                        type='number'
+                        id='2'
+                        min="0"
+                        max="7"
+                        value={thirdNum}
+                        onChange={changeNum}
+                        required
+                    />
+                    <input
+                        name='fourthNum'
+                        type='number'
+                        id='3'
+                        min="0"
+                        max="7"
+                        value={fourthNum}
+                        onChange={changeNum}
+                        required
+                    />
+                    <button className='button' type='submit'>
+                        Submit Guess
+                    </button>
+                </form>
+                :
+                <p></p>
+            }
             <Guess numCorrect={numCorrect} locCorrect={locCorrect} guessesLeft={guessesLeft} guessHistory={guessHistory} solution={solution} />
         </div>
     );

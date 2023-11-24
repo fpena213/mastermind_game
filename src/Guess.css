@@ -1,0 +1,50 @@
+.guesses-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.guesses-left {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.win-message {
+    font-size: 24px;
+    color: #4CAF50; 
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+  
+.guess-history-container {
+    margin-top: 5px;
+}
+  
+.guess-history-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.guess-history-item {
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.guess-info {
+    font-size: 16px;
+}
+  
+#message {
+    color: #ffffff;
+    font-weight: normal;
+    font-size: 14px;
+}
+  
+.game-over-message {
+    font-size: 18px;
+    color: #fc8064;
+    margin-top: 10px;
+    font-weight: bold;
+}

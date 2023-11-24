@@ -26,7 +26,7 @@ function App() {
   }, [guessesLeft]);
 
   return (
-    <div>
+    <div className="gameBox">
       {solution}
       <div>
           <button onClick={handleNewGame}>
@@ -34,7 +34,7 @@ function App() {
           </button>
         </div>
       <div>
-        <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} />
+        <GameBoard solution={solution} guessesLeft={guessesLeft} setGuessesLeft={setGuessesLeft} started={started} />
       </div>
     </div>  
   );

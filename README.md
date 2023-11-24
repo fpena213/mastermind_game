@@ -4,7 +4,7 @@
 
 ## Rules
 
-At the start of each game, the computer will randomly generate a pattern of 4 digit numbers from 0 to 7. It is up to you to solve it.
+At the start of each game, the computer will randomly generate a 4 number combination. It is up to you to solve it.
 
 With each guess, you will receive feedback:
 - "Correct Number": You guessed a correct number.
@@ -13,9 +13,12 @@ With each guess, you will receive feedback:
 
 The computer will not reveal which numbers were correct and/or in the correct location.
 
-In normal play mode, each digit may be between 0-7. Feeling adventurous? Play in **challenge** mode and the digit may be between 0-10. 
+Prior to starting, you must choose a level of difficulty.
+- ```Easy```: Each number may be between 0-4.
+- ```Normal```: Each number may be between 0-7.
+- ```Hard```: Each number may be between 0-9.
 
-*Good luck!*
+#### *Good luck!*
 
 ## How to Start
 

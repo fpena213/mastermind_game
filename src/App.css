@@ -2,13 +2,14 @@
   text-align: center;
 }
 
-.gameBox {
+.game-box {
   background-color: #323a4b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
+  text-align: center;
 }
 
 button {
@@ -20,9 +21,22 @@ button {
   cursor: pointer;
   font-size: 16px;
   margin-top: 8px;
+  margin-left: 5px;
 }
 
 button:hover {
   background-color: #181c24;
 
+}
+
+.difficulty-container {
+  margin-top: 30px;
+}
+
+.game-container {
+  margin-top: 30px;
+}
+
+.selected {
+  background-color: #046f36;
 }

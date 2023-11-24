@@ -23,7 +23,7 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
         win ?
           <div>You Win!</div>
         :
-        !win && guessesLeft !== 10 ?
+        !win && guessesLeft > 0 ?
         <div> 
           Number of Guesses Left: {guessesLeft}
             <h2>Guess History:</h2>
@@ -41,10 +41,12 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory } ) {
             </ul>
           </div>
           :
+          !win && guessesLeft === 0 ?
+          <p>Game Over.</p>
+          :
           <div></div>
           }
       </div>
-
   );
 }
 

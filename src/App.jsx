@@ -27,7 +27,6 @@ function App() {
 
   return (
     <div className="gameBox">
-      {solution}
       <div>
           <button onClick={handleNewGame}>
             Start New Game

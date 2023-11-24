@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Welcome to Mastermind
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Will you crack the ```code?``` This game is a race against the computer to find the solution within 10 attempts.
 
-## Available Scripts
+## Rules
 
-In the project directory, you can run:
+At the start of each game, the computer will randomly generate a pattern of 4 digit numbers from 0 to 7. It is up to you to solve it.
 
-### `npm start`
+With each guess, you will receive feedback:
+- "Correct Number": You guessed a correct number.
+- "Correct Number and Location": You guessed a correct number, and it's in the right position.
+- "All Incorrect": All numbers were incorrect.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The computer will not reveal which numbers were correct and/or in the correct location.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In normal play mode, each digit may be between 0-7. Feeling adventurous? Play in **challenge** mode and the digit may be between 0-10. 
 
-### `npm test`
+*Good luck!*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Start
 
-### `npm run build`
+1. Clone the repository to your local machine:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash  
+   git clone https://github.com/fpena213/mastermind_game.git
+   cd mastermind-game
+2. In your terminal, make sure to install the necessary dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    ```bash
+    npm install
+3. Start your backend server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    npm run dev
+4. In a second terminal, it's time to play!
 
-### `npm run eject`
+    ```bash
+    npm start
+5. If your browser does not automatically show the game, please navigate to http://localhost:3000 to see the game displayed.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## User Interface
+The game interface includes:
+- Input fields for entering your guesses.
+- A button to submit your guess.
+- A history section displaying your previous guesses and their feedback.
+- A counter showing the number of attempts remaining.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Coding Process
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+I wrote the *backend* in Node.js and Express.js for a number of reasons:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```Node.js```
+- Node.js is efficiently handle asynchronous operations. In a game where user input and responses need to be handled promptly, Node.js provides a responsive and non-blocking experience.
+- Node.js is lightweight and performant. In a game where speed is crucial for responsiveness, Node.js can handle a large number of concurrent connections efficiently.
+- The Node.js ecosystem is abundant with packages and modules available through npm. It is easy to find libraries to handle HTTP requests, work databases, or implement additional game features.
+- Node.js is known for its scalability. While Mastermind is a relatively simple game, if I decide to to add more complex features or scale up the user base, Node.js can handle the increased load with ease.
+- Node.js has great community support, making the developer experience easier and simpler.
 
-## Learn More
+```Express.js```
+- Express uses a middleware system that allows you to plug in various functionalities at different points in the request-response cycle. This makes it easy to add features and simplifies debugging because it is easy to log where a potential error is occuring.
+- Express simplifies the process of defining and handling routes. In the game, routes are easily defined for handling guesses, providing feedback, and managing game state.
+- Express provides methods for handling HTTP requests, making it straightforward to parse request bodies, handle query parameters, and set response headers. This streamlines the processing of user input and game responses.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The frontend was written in ```React```.
 
-### Code Splitting
+### Code Structure
+Frontend code is in ```src``` directory, while backend code lives in ```server``` directory. ```public``` directory contains the entry point for the application when it is loaded in a web browser. It's the HTML file that includes the root element where React components are mounted.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future Features
+If given more time, the next feature I would add is user authentication (registration and login functionality) with storage in a SQL database to personalize the experience. I would store history of scores in a NoSQL database.

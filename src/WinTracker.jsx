@@ -43,7 +43,6 @@ function WinTracker( { win, lose } ) {
             <p>High Score: {highScore}</p>
         </div>
     )
-
 }
 
 export default WinTracker;

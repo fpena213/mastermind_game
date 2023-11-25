@@ -36,7 +36,6 @@ getNumberController.compareNumbers = (req, res, next) => {
         let locCorrect = 0;
         const { guess, solution } = req.body;
 
-        //compares each digit in guess number object to each digit in solution number object
         for (let key in guess) {
             const guessDigit = guess[key];
             if (solution[key] === guess[key]) {
@@ -45,6 +44,12 @@ getNumberController.compareNumbers = (req, res, next) => {
                 delete solution[key];
             } else if (Object.values(solution).includes(guessDigit)) {
                 numCorrect++;
+                for (let key in solution) {
+                    if (solution[key] === guessDigit) {
+                        delete solution[key];
+                        break;
+                    }
+                }
             }
         }
 

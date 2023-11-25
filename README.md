@@ -66,6 +66,7 @@ I wrote the *backend* in Node.js and Express.js for a number of reasons:
 
 
 The frontend was written in ```React```.
+For additional features, I added an ability to choose the level of difficulty for those who may want to make the game easier or harder. I also added a UI to show the current score and the highest score obtained.
 
 ### Code Structure
 Frontend code is in ```src``` directory, while backend code lives in ```server``` directory. ```public``` directory contains the entry point for the application when it is loaded in a web browser. It's the HTML file that includes the root element where React components are mounted.

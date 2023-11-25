@@ -38,7 +38,6 @@ function App() {
 
   return (
     <div className="game-box">
-      {solution} {difficulty}
       <div className="difficulty-container">
         Select a difficulty level.
         <DifficultyButtons onSelectDifficulty={handleSelectDifficulty} />

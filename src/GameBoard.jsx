@@ -19,6 +19,8 @@ function GameBoard( {solution, guessesLeft, setGuessesLeft, started } ) {
             setSecondNum('');
             setThirdNum('');
             setFourthNum('');
+            setNumCorrect(0);
+            setLocCorrect(0);
         }
     }, [guessesLeft]);
 

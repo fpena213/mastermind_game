@@ -1,20 +1,29 @@
 import { useState, useEffect } from "react";
 import './Guess.css';
+import WinTracker from "./WinTracker";
 
 function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory, solution } ) {
   const [win, setWin] = useState(false);
+  const [lose, setLose] = useState(false);
 
   useEffect(() => {
     if (numCorrect === 4 && locCorrect === 4) {
       setWin(true);
     }
-  }, [numCorrect, locCorrect]);
+  }, [numCorrect, locCorrect, win]);
 
   useEffect(() => {
     if (guessesLeft === 10) {
       setWin(false);
+      setLose(false)
     }
   }, [guessesLeft])
+
+  useEffect(() => {
+    if (guessesLeft === 0 && !win) {
+      setLose(true);
+    }
+  }, [guessesLeft, win])
 
   return (
       <div className="guesses-container">
@@ -36,7 +45,7 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory, solution 
                       { entry.numCorrect === 0 && entry.locCorrect === 0 && guessesLeft !== 10 ?
                       <div id="message">All incorrect.</div>
                       :
-                      <div id="message">You have {entry.numCorrect} correct numbers and {entry.locCorrect} in the correct location.</div>
+                      <div className="message">You have {entry.numCorrect} correct numbers and {entry.locCorrect} in the correct location.</div>
                       }
                     </li>
                   ))}
@@ -44,11 +53,12 @@ function Guesses( { numCorrect, locCorrect, guessesLeft, guessHistory, solution 
           </div>
         </div>
           :
-          !win && guessesLeft === 0 ?
+          lose ?
           <p className="game-over-message">Game Over. The correct answer was {solution}.</p>
           :
           <div></div>
           }
+        <WinTracker win={win} lose={lose}/>
       </div>
   );
 }

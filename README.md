@@ -14,9 +14,9 @@ With each guess, you will receive feedback:
 The computer will not reveal which numbers were correct and/or in the correct location.
 
 Prior to starting, you must choose a level of difficulty.
-- ```Easy```: Each number may be between 0-4.
-- ```Normal```: Each number may be between 0-7.
-- ```Hard```: Each number may be between 0-9.
+- *Easy*: Each number may be between 0-4.
+- *Normal*: Each number may be between 0-7.
+- *Hard*: Each number may be between 0-9.
 
 #### *Good luck!*
 
